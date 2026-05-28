@@ -6,28 +6,40 @@
 @prefix exsh:    <https://example.com/shapes/> .
 
 exsh:OwlClassDocumentationShape
-    a sh:NodeShape ;
-    sh:targetClass owl:Class ;
+  a sh:NodeShape ;
+  sh:targetClass owl:Class ;
 
-    sh:property [
-        sh:path rdfs:label ;
-        sh:minCount 1 ;
-        sh:message "Every owl:Class must have at least one rdfs:label." ;
-    ] ;
+  sh:property [
+    sh:path rdfs:label ;
+    sh:minCount 1 ;
+    sh:message "Every owl:Class must have at least one rdfs:label." ;
+  ] ;
 
-    sh:or (
-            sh:property [
-                sh:path rdfs:comment ;
-                sh:minCount 1 ;
-            ]
-            sh:property [
-                sh:path dcterms:description ;
-                sh:minCount 1 ;
-            ]
-            sh:property [
-                sh:path skos:definition ;
-                sh:minCount 1 ;
-            ]
-    ) ;
+  sh:or (
+    exsh:HasRdfsCommentShape
+    exsh:HasDctermsDescriptionShape
+    exsh:HasSkosDefinitionShape
+  ) ;
 
-    sh:message "Every owl:Class must have at least one explanatory description: rdfs:comment, dcterms:description, or skos:definition." .
+  sh:message "Every owl:Class must have at least one explanatory description: rdfs:comment, dcterms:description, or skos:definition." .
+
+exsh:HasRdfsCommentShape
+  a sh:NodeShape ;
+  sh:property [
+    sh:path rdfs:comment ;
+    sh:minCount 1 ;
+  ] .
+
+exsh:HasDctermsDescriptionShape 
+  a sh:NodeShape ;
+  sh:property [
+    sh:path dcterms:description ;
+    sh:minCount 1 ;
+  ] .
+
+exsh:HasSkosDefinitionShape 
+  a sh:NodeShape ;
+  sh:property [
+    sh:path skos:definition ;
+    sh:minCount 1 ;
+  ] .
