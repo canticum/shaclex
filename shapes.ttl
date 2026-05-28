@@ -1,0 +1,34 @@
+
+@prefix sh:      <http://www.w3.org/ns/shacl#> .
+@prefix owl:     <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs:    <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix skos:    <http://www.w3.org/2004/02/skos/core#> .
+@prefix exsh:    <https://example.com/shapes/> .
+
+exsh:OwlClassDocumentationShape
+    a sh:NodeShape ;
+    sh:targetClass owl:Class ;
+
+    sh:property [
+        sh:path rdfs:label ;
+        sh:minCount 1 ;
+        sh:message "Every owl:Class must have at least one rdfs:label." ;
+    ] ;
+
+    sh:or (
+            sh:property [
+                sh:path rdfs:comment ;
+                sh:minCount 1 ;
+            ]
+            sh:property [
+                sh:path dcterms:description ;
+                sh:minCount 1 ;
+            ]
+            sh:property [
+                sh:path skos:definition ;
+                sh:minCount 1 ;
+            ]
+    ) ;
+
+    sh:message "Every owl:Class must have at least one explanatory description: rdfs:comment, dcterms:description, or skos:definition." .
