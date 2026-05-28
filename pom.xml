@@ -8,7 +8,7 @@
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <maven.compiler.release>25</maven.compiler.release>
-    <exec.mainClass>com.mycompany.shaclex.Shaclex</exec.mainClass>
+    <exec.mainClass>art.cctcc.shaclex.Shaclex</exec.mainClass>
   </properties>
   <dependencies>
     <!-- RDF model construction -->
